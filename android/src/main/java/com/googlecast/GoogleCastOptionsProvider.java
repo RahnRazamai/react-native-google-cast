@@ -34,9 +34,10 @@ public class GoogleCastOptionsProvider implements OptionsProvider {
                 .build();
 
         return new CastOptions.Builder()
-                .setReceiverApplicationId(CastMediaControlIntent.DEFAULT_MEDIA_RECEIVER_APPLICATION_ID)
+                .setReceiverApplicationId("9096B0C2")
                 .setCastMediaOptions(mediaOptions)
                 .build();
+
     }
 
     @Override
