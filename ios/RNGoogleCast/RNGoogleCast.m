@@ -181,6 +181,7 @@ RCT_EXPORT_METHOD(castMedia: (NSDictionary *)params
                                           customData:nil];
 
   // Cast the video.
+  castSession=[GCKCastContext sharedInstance].sessionManager.currentCastSession;
   if (castSession) {
     [castSession.remoteMediaClient loadMedia:mediaInfo
                                     autoplay:YES
