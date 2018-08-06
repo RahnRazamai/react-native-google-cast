@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/react-native-google-cast.svg)](https://badge.fury.io/js/react-native-google-cast)
+
 # react-native-google-cast
 
 This library wraps the native Google Cast SDK v3 for Android and iOS, providing a unified JavaScript interface.
@@ -8,7 +9,7 @@ This library wraps the native Google Cast SDK v3 for Android and iOS, providing 
 ## Getting started
 
 ```
-$ npm install react-native-google-cast --save
+$ npm install github:RahnRazamai/react-native-google-cast --save
 $ react-native link react-native-google-cast
 ```
 
@@ -63,21 +64,24 @@ $ react-native link react-native-google-cast
 
 ```js
 // Require the module
-import GoogleCast, { CastButton } from 'react-native-google-cast';
+import GoogleCast, { CastButton } from 'react-native-google-cast'
 
 // Render the Cast button which enables to connect to Chromecast
-<CastButton style={{width: 24, height: 24}} />
+;<CastButton style={{ width: 24, height: 24 }} />
 
 // Stream the media to the connected Chromecast
 GoogleCast.castMedia({
-  mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/mp4/BigBuckBunny.mp4',
-  imageUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/images/480x270/BigBuckBunny.jpg',
+  mediaUrl:
+    'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/mp4/BigBuckBunny.mp4',
+  imageUrl:
+    'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/images/480x270/BigBuckBunny.jpg',
   title: 'Big Buck Bunny',
-  subtitle: 'A large and lovable rabbit deals with three tiny bullies, led by a flying squirrel, who are determined to squelch his happiness.',
+  subtitle:
+    'A large and lovable rabbit deals with three tiny bullies, led by a flying squirrel, who are determined to squelch his happiness.',
   studio: 'Blender Foundation',
   streamDuration: 596, // seconds
   playPosition: 10, // seconds
-});
+})
 ```
 
 ## API
@@ -151,7 +155,7 @@ To use the default expanded controller:
 Then, to load the expanded controller, call
 
 ```js
-GoogleCast.launchExpandedControls();
+GoogleCast.launchExpandedControls()
 ```
 
 The expanded controller will also be launched automatically when the user taps the mini controller.
@@ -165,31 +169,47 @@ The library emits events to inform you about current state.
 A session is an end-to-end connection from a sender application (mobile app) to a receiver application (on Chromecast).
 
 ```js
-import GoogleCast from 'react-native-google-cast';
+import GoogleCast from 'react-native-google-cast'
 
 // Establishing connection to Chromecast
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_STARTING, () => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_STARTING, () => {
+  /* callback */
+})
 
 // Connection established
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_STARTED, () => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_STARTED, () => {
+  /* callback */
+})
 
 // Connection failed
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_START_FAILED, (error) => { console.error(error) });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_START_FAILED, error => {
+  console.error(error)
+})
 
 // Connection suspended (your application went to background or disconnected)
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_SUSPENDED, () => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_SUSPENDED, () => {
+  /* callback */
+})
 
 // Attempting to reconnect
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_RESUMING, () => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_RESUMING, () => {
+  /* callback */
+})
 
 // Reconnected
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_RESUMED, () => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_RESUMED, () => {
+  /* callback */
+})
 
 // Disconnecting
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_ENDING, () => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_ENDING, () => {
+  /* callback */
+})
 
 // Disconnected (error provides explanation if ended forcefully)
-GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_ENDED, (error) => { /* callback */ });
+GoogleCast.EventEmitter.addListener(GoogleCast.SESSION_ENDED, error => {
+  /* callback */
+})
 ```
 
 ### Media Events
@@ -198,17 +218,26 @@ Remote media client controls media playback on a Cast receiver.
 
 ```js
 // Status of the media has changed. The `mediaStatus` object contains the new status.
-GoogleCast.EventEmitter.addListener(GoogleCast.MEDIA_STATUS_UPDATED, ({mediaStatus}) => {});
+GoogleCast.EventEmitter.addListener(
+  GoogleCast.MEDIA_STATUS_UPDATED,
+  ({ mediaStatus }) => {},
+)
 ```
 
-For convenience, the following events are triggered in addition to `MEDIA_STATUS_UPDATED` in these special cases (they're called after  `MEDIA_STATUS_UPDATED`, if you're subscribed to both).
+For convenience, the following events are triggered in addition to `MEDIA_STATUS_UPDATED` in these special cases (they're called after `MEDIA_STATUS_UPDATED`, if you're subscribed to both).
 
 ```js
 // Media started playing
-GoogleCast.EventEmitter.addListener(GoogleCast.MEDIA_PLAYBACK_STARTED, ({mediaStatus}) => {});
+GoogleCast.EventEmitter.addListener(
+  GoogleCast.MEDIA_PLAYBACK_STARTED,
+  ({ mediaStatus }) => {},
+)
 
 // Media finished playing
-GoogleCast.EventEmitter.addListener(GoogleCast.MEDIA_PLAYBACK_ENDED, ({mediaStatus}) => {});
+GoogleCast.EventEmitter.addListener(
+  GoogleCast.MEDIA_PLAYBACK_ENDED,
+  ({ mediaStatus }) => {},
+)
 ```
 
 ### Channel Events
@@ -221,13 +250,22 @@ A channel must be registered by calling `GoogleCast.initChannel('urn:x-cast:...'
 
 ```js
 // Communication channel established
-GoogleCast.EventEmitter.addListener(GoogleCast.CHANNEL_CONNECTED, ({namespace}) => {});
+GoogleCast.EventEmitter.addListener(
+  GoogleCast.CHANNEL_CONNECTED,
+  ({ namespace }) => {},
+)
 
 // Communication channel terminated
-GoogleCast.EventEmitter.addListener(GoogleCast.CHANNEL_DISCONNECTED, ({namespace}) => {});
+GoogleCast.EventEmitter.addListener(
+  GoogleCast.CHANNEL_DISCONNECTED,
+  ({ namespace }) => {},
+)
 
 // Message received
-GoogleCast.EventEmitter.addListener(GoogleCast.CHANNEL_MESSAGE_RECEIVED, ({namespace, message}) => {});
+GoogleCast.EventEmitter.addListener(
+  GoogleCast.CHANNEL_MESSAGE_RECEIVED,
+  ({ namespace, message }) => {},
+)
 
 // Send message
 GoogleCast.sendMessage(namespace, message)
@@ -256,9 +294,9 @@ Refer to the [example](example/) folder to find an implementation of this projec
 
 ## Contribution
 
-1. Contributions are welcome!
-1. Fork the repo.
-1. Implement your shiny new thing.
-1. Demonstrate how to use it in the example project.
-1. Document the functionality in the README (here).
-1. PR
+1.  Contributions are welcome!
+1.  Fork the repo.
+1.  Implement your shiny new thing.
+1.  Demonstrate how to use it in the example project.
+1.  Document the functionality in the README (here).
+1.  PR
