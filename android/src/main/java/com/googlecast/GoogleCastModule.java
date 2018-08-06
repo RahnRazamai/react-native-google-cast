@@ -23,10 +23,6 @@ import com.google.android.gms.cast.framework.CastState;
 import com.google.android.gms.cast.framework.SessionManager;
 import com.google.android.gms.cast.framework.SessionManagerListener;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
-import com.google.android.gms.cast.framework.media.widget.MiniControllerFragment;
-
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
 
 import com.google.android.gms.common.images.WebImage;
 
@@ -232,17 +228,6 @@ public class GoogleCastModule
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
-
-    @ReactMethod
-        public void launchMiniMediaControls() {
-            FragmentManager fm = getSupportFragmentManager();
-            MiniControllerFragment fragment = new MiniControllerFragment();
-            if (fragment == null) {
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.add(android.R.id.content,fragment,"myMiniController");
-                ft.commit();
-            }
-        }
 
     private void setupCastListener() {
         mSessionManagerListener = new GoogleCastSessionManagerListener(this);
