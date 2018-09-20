@@ -157,11 +157,11 @@ public class GoogleCastModule
         getReactApplicationContext().runOnUiQueueThread(new Runnable() {
             @Override
             public void run() {
-                   if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+                   if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getReactApplicationContext()) == ConnectionResult.SUCCESS) {
            CastContext castContext = CastContext.getSharedInstance(getReactApplicationContext());
                 promise.resolve(castContext.getCastState() - 1);
         } else {
-            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+            Log.w("TAG", "Google Play services not installed on device. Cannot cast.");
         }
                 
             }
@@ -221,12 +221,12 @@ public class GoogleCastModule
         getReactApplicationContext().runOnUiQueueThread(new Runnable() {
             @Override
             public void run() {
-                  if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+                  if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getReactApplicationContext()) == ConnectionResult.SUCCESS) {
            SessionManager sessionManager = CastContext.getSharedInstance(getReactApplicationContext()).getSessionManager();
                 sessionManager.endCurrentSession(stopCasting);
                 promise.resolve(true);
         } else {
-            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+            Log.w("TAG", "Google Play services not installed on device. Cannot cast.");
         }
               
             }
@@ -250,11 +250,11 @@ public class GoogleCastModule
         getReactApplicationContext().runOnUiQueueThread(new Runnable() {
             @Override
             public void run() {
-                       if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+                       if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getReactApplicationContext()) == ConnectionResult.SUCCESS) {
            SessionManager sessionManager = CastContext.getSharedInstance(getReactApplicationContext()).getSessionManager();
                 sessionManager.addSessionManagerListener(mSessionManagerListener, CastSession.class);
         } else {
-            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+            Log.w("TAG", "Google Play services not installed on device. Cannot cast.");
         }
                
             }
@@ -266,12 +266,12 @@ public class GoogleCastModule
         getReactApplicationContext().runOnUiQueueThread(new Runnable() {
             @Override
             public void run() {
-                   if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+                   if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getReactApplicationContext()) == ConnectionResult.SUCCESS) {
           SessionManager sessionManager = CastContext.getSharedInstance(getReactApplicationContext()).getSessionManager();
                 sessionManager.removeSessionManagerListener(
                         mSessionManagerListener, CastSession.class);
         } else {
-            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+            Log.w("TAG", "Google Play services not installed on device. Cannot cast.");
         }
                 
             }

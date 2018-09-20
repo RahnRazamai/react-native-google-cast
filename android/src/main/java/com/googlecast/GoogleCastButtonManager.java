@@ -7,6 +7,7 @@ import android.support.v7.app.MediaRouteButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.os.Handler;
+import android.util.Log;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -44,7 +45,7 @@ public class GoogleCastButtonManager extends SimpleViewManager<MediaRouteButton>
         });
 
         } else {
-            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+            Log.w("TAG", "Google Play services not installed on device. Cannot cast.");
         }
 
         return button;

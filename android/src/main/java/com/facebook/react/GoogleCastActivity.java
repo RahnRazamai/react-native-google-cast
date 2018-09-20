@@ -8,6 +8,7 @@
  */
 
 package com.facebook.react;
+import android.util.Log;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public abstract class GoogleCastActivity extends AppCompatActivity
         if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
            CastContext.getSharedInstance(this);
         } else {
-            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+            Log.w("TAG", "Google Play services not installed on device. Cannot cast.");
         }
         
     }
