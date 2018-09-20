@@ -15,6 +15,8 @@ import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastState;
 import com.google.android.gms.cast.framework.CastStateListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 public class GoogleCastButtonManager extends SimpleViewManager<MediaRouteButton> {
 
@@ -27,19 +29,23 @@ public class GoogleCastButtonManager extends SimpleViewManager<MediaRouteButton>
 
     @Override
     public MediaRouteButton createViewInstance(ThemedReactContext context) {
-        CastContext castContext = CastContext.getSharedInstance(context);
+      
 
         final MediaRouteButton button = new ColorableMediaRouteButton(context);
-        CastButtonFactory.setUpMediaRouteButton(context, button);
-
-        updateButtonState(button, castContext.getCastState());
-
-        castContext.addCastStateListener(new CastStateListener() {
+        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS) {
+               CastContext castContext = CastContext.getSharedInstance(context);
+             CastButtonFactory.setUpMediaRouteButton(context, button);
+               updateButtonState(button, castContext.getCastState());
+                castContext.addCastStateListener(new CastStateListener() {
             @Override
             public void onCastStateChanged(int newState) {
                 GoogleCastButtonManager.this.updateButtonState(button, newState);
             }
         });
+
+        } else {
+            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+        }
 
         return button;
     }

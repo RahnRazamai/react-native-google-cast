@@ -18,6 +18,8 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import javax.annotation.Nullable;
 
@@ -54,7 +56,12 @@ public abstract class GoogleCastActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         mDelegate.onCreate(savedInstanceState);
         // lazy load Google Cast context
-        CastContext.getSharedInstance(this);
+        if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+           CastContext.getSharedInstance(this);
+        } else {
+            Log.w(TAG, "Google Play services not installed on device. Cannot cast.");
+        }
+        
     }
 
     @Override
